@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Młyny Kapka — Koncepcja Aranżacji Biura | Nowy Styl</title>
+<style>
+  :root {
+    --ns-dark: #0d1f47;
+    --ns-blue: #144089;
+    --ns-mid: #1e5fad;
+    --ns-accent: #e8b84b;
+    --ns-gray: #6b7280;
+    --ns-light: #f8f9fa;
+    --ns-white: #ffffff;
+    --ns-border: #e5e7eb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #eef1f6; color: var(--ns-dark); overflow-x: hidden; }
+
+  /* ── NAV ─────────────────────────────────────── */
+  .nav-bar {
+    position: fixed; top: 0; left: 0; right: 0; height: 64px;
+    background: var(--ns-white);
+    border-bottom: 3px solid var(--ns-blue);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 28px; z-index: 1000;
+    box-shadow: 0 2px 12px rgba(20,64,137,.10);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 16px; }
+  .ns-logo-img {
+    height: 40px; /* BIGGER LOGO */
+    display: flex; align-items: center;
+  }
+  .ns-logo-img img { height: 40px; width: auto; }
+  /* Fallback SVG logo if img fails */
+  .ns-logo-fallback {
+    background: var(--ns-blue); color: white;
+    font-size: 15px; font-weight: 800; letter-spacing: 1.5px;
+    padding: 8px 14px; border-radius: 4px; display: none;
+  }
+  .nav-pipe { width: 1px; height: 32px; background: var(--ns-border); }
+  .nav-client { font-size: 13px; color: var(--ns-gray); letter-spacing: .4px; font-weight: 500; }
+  .nav-tabs { display: flex; gap: 6px; }
+  .nav-tab {
+    padding: 7px 16px; border: 2px solid var(--ns-border); border-radius: 20px;
+    font-size: 12px; font-weight: 700; cursor: pointer; transition: all .2s;
+    background: white; color: var(--ns-gray); letter-spacing: .3px;
+  }
+  .nav-tab.active { background: var(--ns-blue); color: white; border-color: var(--ns-blue); }
+  .nav-tab:hover:not(.active) { border-color: var(--ns-blue); color: var(--ns-blue); }
+  .nav-slide-counter { font-size: 11px; color: #aaa; min-width: 70px; text-align: right; }
+
+  /* ── LAYOUT ──────────────────────────────────── */
+  .page-layout { display: flex; min-height: calc(100vh - 64px); margin-top: 64px; }
+
+  /* ── SIDEBAR ─────────────────────────────────── */
+  .sidebar {
+    width: 210px; min-width: 210px; background: var(--ns-white);
+    border-right: 1px solid var(--ns-border);
+    position: sticky; top: 64px; height: calc(100vh - 64px);
+    overflow-y: auto; padding: 20px 0;
+  }
+  .sidebar-group-label {
+    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    color: #bbb; padding: 0 18px; margin: 14px 0 6px; font-weight: 700;
+  }
+  .sidebar-item {
+    padding: 10px 18px; cursor: pointer; font-size: 12.5px; color: var(--ns-gray);
+    display: flex; align-items: center; gap: 10px; transition: all .15s;
+    border-left: 3px solid transparent; user-select: none;
+  }
+  .sidebar-item:hover { background: #f3f6ff; color: var(--ns-dark); }
+  .sidebar-item.active { background: #eff4ff; color: var(--ns-blue); border-left-color: var(--ns-blue); font-weight: 700; }
+  .sidebar-step {
+    width: 20px; height: 20px; background: var(--ns-border); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; flex-shrink: 0; color: #999;
+  }
+  .sidebar-item.active .sidebar-step { background: var(--ns-blue); color: white; }
+
+  /* ── MAIN CONTENT ────────────────────────────── */
+  .main-content { flex: 1; overflow: hidden; }
+
+  /* ── SLIDES ──────────────────────────────────── */
+  .slide {
+    display: none; min-height: calc(100vh - 64px);
+    padding: 48px 60px; animation: fadeUp .3s ease;
+  }
+  .slide.active { display: block; }
+  .slide-cover.active { display: flex !important; }
+  .slide-thankyou.active { display: flex !important; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── COVER ───────────────────────────────────── */
+  .slide-cover {
+    background: linear-gradient(140deg, #091a3e 0%, #144089 55%, #1e5fad 100%);
+    flex-direction: column; justify-content: center;
+    padding: 80px 10%; position: relative; overflow: hidden;
+  }
+  .slide-cover::before {
+    content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 42%;
+    background: url('materialy/01_hol.png') center/cover;
+    opacity: .15;
+  }
+  .slide-cover::after {
+    content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 42%;
+    background: linear-gradient(to right, #144089 0%, transparent 40%);
+  }
+  .cover-badge {
+    background: var(--ns-accent); color: #1a1a2e;
+    font-size: 10px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 20px; display: inline-block; margin-bottom: 28px;
+  }
+  .cover-title {
+    font-size: 62px; font-weight: 800; color: white; line-height: 1.05;
+    font-family: Georgia, serif; margin-bottom: 10px;
+  }
+  .cover-sub { font-size: 19px; color: rgba(255,255,255,.6); font-weight: 300; margin-bottom: 36px; }
+  .cover-divider { width: 56px; height: 3px; background: var(--ns-accent); margin-bottom: 28px; }
+  .cover-body { color: rgba(255,255,255,.75); font-size: 15px; line-height: 1.7; max-width: 480px; margin-bottom: 40px; }
+  .cover-meta { display: flex; gap: 36px; }
+  .cover-meta-item .label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.45); }
+  .cover-meta-item .value { font-size: 14px; font-weight: 600; color: rgba(255,255,255,.9); margin-top: 4px; }
+  .cover-ns { position: absolute; bottom: 28px; right: 56px; }
+  .cover-ns img { height: 28px; opacity: .5; filter: brightness(10); }
+
+  /* ── SECTION HEADER ──────────────────────────── */
+  .sec-header { margin-bottom: 34px; border-left: 4px solid var(--ns-blue); padding-left: 18px; }
+  .sec-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--ns-blue); font-weight: 700; margin-bottom: 5px; }
+  .sec-title { font-size: 30px; font-weight: 700; line-height: 1.2; }
+  .sec-desc { font-size: 14px; color: var(--ns-gray); margin-top: 8px; line-height: 1.6; max-width: 720px; }
+
+  /* ── ABOUT NS (full branding slide) ─────────────────── */
+  .ns-brand-hero {
+    background: linear-gradient(140deg, #091a3e, #144089);
+    color: white; border-radius: 14px; padding: 44px 52px;
+    display: grid; grid-template-columns: 3fr 1fr; gap: 40px;
+    align-items: center; margin-bottom: 28px;
+  }
+  .ns-brand-hero .ns-hero-logo { margin-bottom: 20px; }
+  .ns-brand-hero .ns-hero-logo img { height: 36px; filter: brightness(10); }
+  .ns-brand-hero h2 { font-size: 30px; font-weight: 300; line-height: 1.3; margin-bottom: 16px; font-family: Georgia, serif; }
+  .ns-brand-hero h2 strong { font-weight: 800; }
+  .ns-brand-hero p { font-size: 14px; line-height: 1.75; opacity: .85; }
+  .ns-stats-col { border-left: 1px solid rgba(255,255,255,.2); padding-left: 40px; display: flex; flex-direction: column; gap: 22px; }
+  .ns-stat .num { font-size: 42px; font-weight: 900; color: var(--ns-accent); line-height: 1; }
+  .ns-stat .lbl { font-size: 12px; opacity: .65; margin-top: 3px; }
+  .ns-pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+  .ns-pillar {
+    background: white; border-radius: 10px; padding: 20px 18px;
+    border-top: 3px solid var(--ns-blue);
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+  }
+  .ns-pillar .icon { font-size: 22px; margin-bottom: 10px; }
+  .ns-pillar h4 { font-size: 13px; font-weight: 700; margin-bottom: 7px; }
+  .ns-pillar p  { font-size: 12px; color: var(--ns-gray); line-height: 1.55; }
+  .ns-awards {
+    background: #f8f9fa; border-radius: 10px; padding: 18px 24px;
+    border: 1px solid var(--ns-border); display: flex; align-items: center; gap: 32px;
+  }
+  .ns-awards .aw-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #aaa; font-weight: 700; }
+  .ns-awards .aw-list { display: flex; gap: 20px; flex-wrap: wrap; }
+  .ns-award-badge {
+    background: var(--ns-blue); color: white;
+    font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 6px;
+    letter-spacing: .3px;
+  }
+
+  /* ── COMPARE GRID ────────────────────────────── */
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-bottom: 28px; }
+  .compare-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,.06); }
+  .compare-card.optima { border-top: 4px solid #3b9ad9; }
+  .compare-card.maks   { border-top: 4px solid var(--ns-accent); }
+  .ccard-head { padding: 18px 22px 14px; background: #fafbfc; border-bottom: 1px solid var(--ns-border); }
+  .ccard-head h3 { font-size: 18px; font-weight: 700; }
+  .ccard-head p  { font-size: 12px; color: var(--ns-gray); margin-top: 3px; }
+  .ccard-body { padding: 16px 22px; }
+  .crow { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f3f3f3; font-size: 12.5px; }
+  .crow:last-child { border-bottom: none; }
+  .crow .cl { color: var(--ns-gray); }
+  .crow .cv { font-weight: 600; text-align: right; max-width: 55%; }
+
+  /* ── GALLERY ─────────────────────────────────── */
+  .gallery-grid { display: grid; gap: 10px; }
+  .gallery-grid.g2 { grid-template-columns: 1fr 1fr; }
+  .gallery-grid.g3 { grid-template-columns: 1fr 1fr 1fr; }
+  .gallery-grid.g4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .gitem {
+    border-radius: 9px; overflow: hidden; background: #dde1e8;
+    box-shadow: 0 2px 8px rgba(0,0,0,.07); position: relative;
+    min-height: 160px;
+  }
+  .gitem img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gitem.tall { grid-row: span 2; }
+  .gitem.wide { grid-column: span 2; }
+  .gcap {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,.62));
+    color: white; padding: 20px 12px 10px; font-size: 11.5px; font-weight: 600;
+  }
+
+  /* ── VARIANT BADGE ───────────────────────────── */
+  .vbadge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 14px; border-radius: 16px; font-size: 11px; font-weight: 700;
+    letter-spacing: .4px; margin-bottom: 10px;
+  }
+  .vbadge.opt { background: #e0f0fd; color: #1565a8; border: 1.5px solid #b8ddf6; }
+  .vbadge.mak { background: #fef5e4; color: #95600b; border: 1.5px solid #f5d893; }
+
+  /* ── FLOORPLAN ───────────────────────────────── */
+  .fp-box { background: white; border-radius: 10px; padding: 16px; box-shadow: 0 1px 8px rgba(0,0,0,.05); margin-bottom: 18px; }
+  .fp-box img { width: 100%; border-radius: 5px; display: block; }
+  .fp-lbl { text-align: center; font-size: 11px; color: var(--ns-gray); margin-top: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: .8px; }
+
+  /* ── ZONES ───────────────────────────────────── */
+  .zones-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 22px; align-items: start; }
+  .zone-list { display: flex; flex-direction: column; gap: 10px; }
+  .zone { background: white; border-radius: 9px; padding: 13px 16px; border-left: 4px solid var(--ns-blue); box-shadow: 0 1px 5px rgba(0,0,0,.05); }
+  .zone h4 { font-size: 13px; font-weight: 700; }
+  .zone p  { font-size: 11.5px; color: var(--ns-gray); margin-top: 3px; line-height: 1.4; }
+  .zone.z1 { border-color: #8b5cf6; }
+  .zone.z2 { border-color: #3b82f6; }
+  .zone.z3 { border-color: #10b981; }
+  .zone.z4 { border-color: #f59e0b; }
+  .zone.z5 { border-color: #ef4444; }
+  .zone.z6 { border-color: #6366f1; }
+
+  /* ── INFO BOXES ──────────────────────────────── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
+  .info-box { background: white; border-radius: 10px; padding: 18px 22px; border: 1px solid var(--ns-border); box-shadow: 0 1px 6px rgba(0,0,0,.04); }
+  .info-box h4 { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+  .info-box p  { font-size: 12.5px; color: #374151; line-height: 1.6; }
+  .box-blue  { border-left: 4px solid var(--ns-blue); background: linear-gradient(135deg,#eff6ff,#dbeafe); }
+  .box-amber { border-left: 4px solid var(--ns-accent); background: linear-gradient(135deg,#fffbeb,#fef3c7); }
+  .box-blue h4  { color: var(--ns-blue); }
+  .box-amber h4 { color: #92400e; }
+
+  /* ── PRODUCTS GRID ───────────────────────────── */
+  .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .prod-card {
+    background: white; border-radius: 11px; overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,.06); border: 1px solid var(--ns-border);
+    transition: transform .2s, box-shadow .2s; display: flex; flex-direction: column;
+  }
+  .prod-card:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0,0,0,.1); }
+  .prod-img {
+    height: 190px; overflow: hidden; background: #f0f2f5;
+    display: flex; align-items: center; justify-content: center; position: relative;
+  }
+  .prod-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s; }
+  .prod-card:hover .prod-img img { transform: scale(1.04); }
+  .prod-img .img-placeholder {
+    width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+    font-size: 48px; opacity: .25;
+  }
+  .prod-body { padding: 13px 15px 14px; flex: 1; display: flex; flex-direction: column; }
+  .prod-line { font-size: 10px; color: var(--ns-blue); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+  .prod-name { font-size: 15px; font-weight: 700; margin: 3px 0 7px; }
+  .prod-desc { font-size: 11.5px; color: var(--ns-gray); line-height: 1.55; flex: 1; margin-bottom: 10px; }
+  .prod-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+  .prod-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .prod-tag { background: #eff4ff; color: var(--ns-blue); font-size: 9.5px; font-weight: 700; padding: 2px 7px; border-radius: 8px; }
+  .prod-link {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 10.5px; font-weight: 700; color: var(--ns-blue);
+    text-decoration: none; padding: 4px 10px; border: 1.5px solid var(--ns-blue);
+    border-radius: 14px; transition: all .15s; white-space: nowrap; flex-shrink: 0;
+  }
+  .prod-link:hover { background: var(--ns-blue); color: white; }
+  .prod-link::after { content: '→'; }
+
+  /* ── SUMMARY TABLE ───────────────────────────── */
+  .sum-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 22px; }
+  .sum-table th { background: var(--ns-blue); color: white; padding: 10px 13px; text-align: left; font-size: 11px; letter-spacing: .3px; font-weight: 700; }
+  .sum-table td { padding: 9px 13px; border-bottom: 1px solid var(--ns-border); vertical-align: top; }
+  .sum-table tr:nth-child(even) td { background: #f9fafb; }
+  .sum-table td:first-child { font-weight: 600; }
+
+  /* ── THANK YOU ───────────────────────────────── */
+  .slide-thankyou {
+    background: linear-gradient(140deg, #091a3e, #144089);
+    flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; color: white; min-height: calc(100vh - 64px);
+  }
+  .ty-logo { margin-bottom: 32px; }
+  .ty-logo img { height: 44px; filter: brightness(10); opacity: .8; }
+  .ty-title { font-size: 52px; font-weight: 800; margin-bottom: 12px; font-family: Georgia, serif; }
+  .ty-sub { font-size: 17px; opacity: .65; margin-bottom: 36px; }
+  .ty-box {
+    background: rgba(255,255,255,.08); border-radius: 12px; padding: 28px 52px;
+    border: 1px solid rgba(255,255,255,.15); max-width: 520px;
+  }
+  .ty-box p { font-size: 14px; opacity: .8; line-height: 2.1; }
+
+  /* ── misc helpers ────────────────────────────── */
+  .mb16 { margin-bottom: 16px; }
+  .mb24 { margin-bottom: 24px; }
+  .lead { font-size: 15px; line-height: 1.7; color: #444; margin-bottom: 22px; }
+  hr.light { border: none; border-top: 1px solid var(--ns-border); margin: 24px 0; }
+
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAV ═══════════════════════════════════════════════ -->
+<nav class="nav-bar">
+  <div class="nav-logo">
+    <div class="ns-logo-img">
+      <img src="https://www.nowystyl.com/getmedia/625eb32f-673f-47f9-839c-93e309df0ba4/Nowy-Styl-logo.svg?ext=.svg"
+           alt="Nowy Styl"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+      <div class="ns-logo-fallback">NOWY STYL</div>
+    </div>
+    <div class="nav-pipe"></div>
+    <span class="nav-client">Młyny Kapka — Koncepcja Aranżacji Biura</span>
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchVariant('all',this)">Przegląd</button>
+    <button class="nav-tab" onclick="switchVariant('optima',this)">🔵 Optima</button>
+    <button class="nav-tab" onclick="switchVariant('maks',this)">🟡 Maks</button>
+  </div>
+  <span class="nav-slide-counter" id="counter">1 / 10</span>
+</nav>
+
+<!-- ═══════ PAGE LAYOUT ══════════════════════════════════════ -->
+<div class="page-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-group-label">Prezentacja</div>
+
+    <div class="sidebar-item active" onclick="goTo(0)">
+      <div class="sidebar-step">1</div>Strona tytułowa
+    </div>
+    <div class="sidebar-item" onclick="goTo(1)">
+      <div class="sidebar-step">2</div>Nowy Styl
+    </div>
+    <div class="sidebar-item" onclick="goTo(2)">
+      <div class="sidebar-step">3</div>Koncepcja — strefy
+    </div>
+    <div class="sidebar-item" onclick="goTo(3)">
+      <div class="sidebar-step">4</div>Plany — parter
+    </div>
+    <div class="sidebar-item" onclick="goTo(4)">
+      <div class="sidebar-step">5</div>Hol &amp; Recepcja
+    </div>
+    <div class="sidebar-item" onclick="goTo(5)">
+      <div class="sidebar-step">6</div>Open Space — parter
+    </div>
+    <div class="sidebar-item" onclick="goTo(6)">
+      <div class="sidebar-step">7</div>Sale &amp; Socjalne
+    </div>
+    <div class="sidebar-item" onclick="goTo(7)">
+      <div class="sidebar-step">8</div>Piętro
+    </div>
+    <div class="sidebar-item" onclick="goTo(8)">
+      <div class="sidebar-step">9</div>Produkty kluczowe
+    </div>
+    <div class="sidebar-item" onclick="goTo(9)">
+      <div class="sidebar-step">10</div>Podsumowanie
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- ══ SLIDE 0: COVER ══════════════════════════════════ -->
+    <div class="slide slide-cover active" id="s0">
+      <div class="cover-badge">Propozycja Koncepcyjna · Wrzesień 2026</div>
+      <div class="cover-title">Młyny Kapka</div>
+      <div class="cover-sub">Nowa przestrzeń pracy</div>
+      <div class="cover-divider"></div>
+      <div class="cover-body">
+        Prezentacja koncepcyjna przygotowana przez zespół Nowy Styl.<br>
+        Dwa warianty projektu — <strong style="color:rgba(255,255,255,.95)">Optima</strong> i <strong style="color:rgba(255,255,255,.95)">Maks</strong> — oparte na spójnej palecie produktów, różniące się zakresem wyposażenia.
+      </div>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <div class="label">Klient</div>
+          <div class="value">Młyny Kapka Sp. z o.o.</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="label">Data</div>
+          <div class="value">Wrzesień 2026</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="label">Autor</div>
+          <div class="value">Nowy Styl Group</div>
+        </div>
+      </div>
+      <div class="cover-ns">
+        <img src="https://www.nowystyl.com/getmedia/625eb32f-673f-47f9-839c-93e309df0ba4/Nowy-Styl-logo.svg?ext=.svg" alt="Nowy Styl">
+      </div>
+    </div>
+
+    <!-- ══ SLIDE 1: O NOWY STYL ════════════════════════════ -->
+    <div class="slide" id="s1">
+      <div class="sec-header">
+        <div class="sec-tag">Partner</div>
+        <div class="sec-title">Nowy Styl — Tworzymy miejsca do pracy</div>
+      </div>
+
+      <div class="ns-brand-hero">
+        <div>
+          <div class="ns-hero-logo">
+            <img src="https://www.nowystyl.com/getmedia/625eb32f-673f-47f9-839c-93e309df0ba4/Nowy-Styl-logo.svg?ext=.svg" alt="Nowy Styl">
+          </div>
+          <h2>Europejski lider<br><strong>mebli biurowych i przestrzeni publicznych</strong></h2>
+          <p>Nowy Styl to producent mebli biurowych i rozwiązań do przestrzeni publicznych działający w ponad 70 krajach. Tworzymy inspirujące środowiska pracy, łącząc ergonomię, estetykę i trwałość. Nasza oferta obejmuje pełen ekosystem wyposażenia biura — od stanowisk pracy przez strefy spotkań, po przestrzenie wypoczynkowe — uzupełniony o kompleksowe usługi projektowe i logistyczne.</p>
+          <p style="margin-top:12px;">Działamy według zasady <em>„Work is not a place — it's a feeling."</em> Nasze projekty wspierają dobrostan pracowników, wzmacniają kulturę organizacyjną i budują marki firm.</p>
+        </div>
+        <div class="ns-stats-col">
+          <div class="ns-stat">
+            <div class="num">70+</div>
+            <div class="lbl">krajów dystrybucji</div>
+          </div>
+          <div class="ns-stat">
+            <div class="num">30+</div>
+            <div class="lbl">lat doświadczenia</div>
+          </div>
+          <div class="ns-stat">
+            <div class="num">5</div>
+            <div class="lbl">zakładów produkcyjnych</div>
+          </div>
+          <div class="ns-stat">
+            <div class="num">100+</div>
+            <div class="lbl">nagród designu</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ns-pillars">
+        <div class="ns-pillar">
+          <div class="icon">🪑</div>
+          <h4>Produkcja</h4>
+          <p>Własne zakłady produkcyjne w Polsce, Niemczech i Ukrainie. Pełna kontrola jakości na każdym etapie.</p>
+        </div>
+        <div class="ns-pillar">
+          <div class="icon">✏️</div>
+          <h4>Projektowanie</h4>
+          <p>Usługi doradztwa i projektowania Workplace — od analizy potrzeb po gotową aranżację i montaż.</p>
+        </div>
+        <div class="ns-pillar">
+          <div class="icon">🌿</div>
+          <h4>Zrównoważony rozwój</h4>
+          <p>Program use2, materiały z certyfikowanych lasów FSC, recykling mebli, minimalizacja śladu CO₂.</p>
+        </div>
+        <div class="ns-pillar">
+          <div class="icon">🏆</div>
+          <h4>Wyróżnienia</h4>
+          <p>German Design Award, Red Dot, IF Design Award — setki nagród za innowacje i wzornictwo.</p>
+        </div>
+      </div>
+
+      <div class="ns-awards">
+        <div class="aw-label">Nagrody designu</div>
+        <div class="aw-list">
+          <span class="ns-award-badge">German Design Award ×12</span>
+          <span class="ns-award-badge">Red Dot</span>
+          <span class="ns-award-badge">IF Design Award</span>
+          <span class="ns-award-badge">German Innovation Award Gold</span>
+          <span class="ns-award-badge">Certyfikat GS</span>
+          <span class="ns-award-badge">FSC®</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SLIDE 2: KONCEPCJA ══════════════════════════════ -->
+    <div class="slide" id="s2">
+      <div class="sec-header">
+        <div class="sec-tag">Koncepcja</div>
+        <div class="sec-title">Podział przestrzeni — strefy funkcjonalne</div>
+        <div class="sec-desc">Projekt obejmuje parter i piętro. Oba warianty (Optima i Maks) korzystają z tych samych stref i tych samych linii produktowych — wariant Maks oferuje szerszy zakres wyposażenia tej samej rodziny produktów.</div>
+      </div>
+
+      <div class="zones-layout">
+        <div class="zone-list">
+          <div class="zone z1"><h4>🚪 Hol & Recepcja</h4><p>Lada Velum, sofa Tilkka, stolik kawowy — reprezentacyjne wejście</p></div>
+          <div class="zone z2"><h4>💻 Open Space — Parter</h4><p>Biurka CS5040, krzesła Xilium, lockery / szafy ES</p></div>
+          <div class="zone z3"><h4>📊 Sale konferencyjne</h4><p>Stoły CS5040 A-Leg, krzesła Flesco i Vapaa — duża sala i mała salka</p></div>
+          <div class="zone z4"><h4>☕ Pomieszczenie socjalne</h4><p>Sofa Naudu, szafki Easy Space, Aplo Cabinet, Flowerpot</p></div>
+          <div class="zone z5"><h4>🎧 Strefa akustyczna</h4><p>Kabiny SPIX Meet Pod (Maks, 4os.) lub Phone Pod (Optima, 1os.)</p></div>
+          <div class="zone z6"><h4>🏢 Open Space — Piętro</h4><p>Kontynuacja stanowisk pracy, szafy, szatnia pracownicza</p></div>
+        </div>
+        <div>
+          <div class="gallery-grid g3" style="height:440px;">
+            <div class="gitem tall">
+              <img src="materialy/01_hol.png" alt="Hol">
+              <div class="gcap">Hol — wejście główne</div>
+            </div>
+            <div class="gitem">
+              <img src="materialy/04_openspace_parter_maks 1.png" alt="Open space">
+              <div class="gcap">Open Space</div>
+            </div>
+            <div class="gitem">
+              <img src="materialy/08_parter_du++a sala konf.png" alt="Sala konf.">
+              <div class="gcap">Sala konferencyjna</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="light">
+      <div class="three-col" style="margin-top:12px;">
+        <div class="info-box box-blue">
+          <h4>🔵 Wariant OPTIMA</h4>
+          <p>Zoptymalizowany dobór produktów z tych samych linii. System biurek CS5040 w obu wariantach, SPIX Phone Pod zamiast Meet Pod, ES Cabinet zamiast Puzlo Locker. Pełna funkcjonalność i zachowanie większej przestrzeni między stanowiskami.</p>
+        </div>
+        <div class="info-box box-amber">
+          <h4>🟡 Wariant MAKS</h4>
+          <p>Pełne wyposażenie z flagowych wariantów każdej linii. CS5040 z media portami, Puzlo Locker ×14, SPIX Meet Pod ×2. Więcej stanowisk, więcej możliwości konfiguracji.</p>
+        </div>
+        <div class="info-box" style="border-left:4px solid #10b981;background:linear-gradient(135deg,#f0fdf4,#dcfce7);">
+          <h4 style="color:#065f46;">📐 Zakres projektu</h4>
+          <p>Parter (hol, recepcja, open space, 2 sale konferencyjne, socjalne/izolacja) + Piętro (open space + szatnia). Łącznie ok. 80–100 stanowisk pracy.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SLIDE 3: PLANY PARTER ════════════════════════════ -->
+    <div class="slide" id="s3">
+      <div class="sec-header">
+        <div class="sec-tag">Plany</div>
+        <div class="sec-title">Rzuty kondygnacji — Parter</div>
+        <div class="sec-desc">Porównanie układu obu wariantów na poziomie parteru.</div>
+      </div>
+      <div class="two-col">
+        <div>
+          <div class="vbadge opt">🔵 Wariant OPTIMA — Mniejszy zakres</div>
+          <div class="fp-box"><img src="materialy/00_parter_wariant optima_rzut.png" alt="Parter Optima">
+            <div class="fp-lbl">Parter · Wariant Optima</div></div>
+          <div class="info-box box-blue">
+            <h4>Charakterystyka Optima</h4>
+            <p>CS5040 Desk I-Leg, SPIX Phone Pod ×3, szafy Easy Space. Rozwiązanie stawiające na większą przestrzeń indywidualną — ta sama estetyka, zoptymalizowany zakres wyposażenia.</p>
+          </div>
+        </div>
+        <div>
+          <div class="vbadge mak">🟡 Wariant MAKS — Pełny</div>
+          <div class="fp-box"><img src="materialy/00_parter_wariant maks_rzut.png" alt="Parter Maks">
+            <div class="fp-lbl">Parter · Wariant Maks</div></div>
+          <div class="info-box box-amber">
+            <h4>Charakterystyka Maks</h4>
+            <p>CS5040 z panelami i media portami, Puzlo Locker SQ ×14, SPIX Meet Pod 4U ×2. Pełne wyposażenie z kabiną spotkań i bogatą infrastrukturą kablową.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SLIDE 4: HOL & RECEPCJA ══════════════════════════ -->
+    <div class="slide" id="s4">
+      <div class="sec-header">
+        <div class="sec-tag">Strefa 1</div>
+        <div class="sec-title">Hol wejściowy i Recepcja</div>
+        <div class="sec-desc">Identyczne rozwiązanie w obu wariantach. Lada Velum, strefa oczekiwania z sofą Tilkka i stolikiem — spójne i reprezentacyjne wejście.</div>
+      </div>
+      <div class="gallery-grid g3 mb24" style="height:280px;">
+        <div class="gitem tall">
+          <img src="materialy/01_hol.png" alt="Hol">
+          <div class="gcap">Hol wejściowy</div>
+        </div>
+        <div class="gitem">
+          <img src="materialy/02_recepcja 1.png" alt="Recepcja 1">
+          <div class="gcap">Recepcja — ujęcie 1</div>
+        </div>
+        <div class="gitem">
+          <img src="materialy/03_recepcja 2.png" alt="Recepcja 2">
+          <div class="gcap">Recepcja — ujęcie 2</div>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="info-box box-blue">
+          <h4>🪑 Produkty — Hol &amp; Recepcja <span style="font-size:10px;font-weight:400;color:#888;">(oba warianty)</span></h4>
+          <p>
+            <strong>VELUM</strong> — lada recepcyjna, moduł prostokątny wysoki, 2000×800×1120 mm, MFC<br><br>
+            <strong>XILIUM DUO-BACK</strong> — krzesło obrotowe dla recepcjonisty, certyfikat GS<br><br>
+            <strong>TILKKA SOFA 4L</strong> — sofa 2-os. dla gości, 1180×720 mm, tkanina Cura<br><br>
+            <strong>TILKKA TABLE LOUNGE 35</strong> — stolik kawowy okrągły ⌀800, H350 mm
+          </p>
+        </div>
+        <div class="info-box box-amber">
+          <h4>💡 Myśl projektowa</h4>
+          <p>Strefa wejścia łączy reprezentacyjność z komfortem gości. Wysoki moduł lady Velum tworzy naturalną barierę wizualną. Sofa Tilkka z okrągłym stolikiem tworzy przytulną poczekalnię — biofiliczy design nawiązuje do natury, co wzmacnia pierwsze wrażenie.</p>
+          <p style="margin-top:10px;">Kolorystyka neutralna: MFC Acacia Light (NJ) lub Neutral Kraft (NK) — spójna z całym biurem.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SLIDE 5: OPEN SPACE ══════════════════════════════ -->
+    <div class="slide" id="s5">
+      <div class="sec-header">
+        <div class="sec-tag">Strefa 2</div>
+        <div class="sec-title">Open Space — Parter</div>
+        <div class="sec-desc">Oba warianty korzystają z tej samej linii krzeseł Xilium, biurek CS5040 i tej samej logiki układu. Różnica tkwi w zagęszczeniu stanowisk i rozwiązaniu do przechowywania.</div>
+      </div>
+
+      <div class="gallery-grid" style="grid-template-columns:1fr 1fr 1fr 1fr;height:220px;gap:10px;margin-bottom:22px;">
+        <div class="gitem wide">
+          <img src="materialy/04_openspace_parter_maks 1.png" alt="Maks 1">
+          <div class="gcap">🟡 Maks — Open Space 1</div>
+        </div>
+        <div class="gitem">
+          <img src="materialy/06_openspace_parter_optima 1.png" alt="Optima 1">
+          <div class="gcap">🔵 Optima — Open Space 1</div>
+        </div>
+        <div class="gitem">
+          <img src="materialy/07_openspace_parter_optima 2.png" alt="Optima 2">
+          <div class="gcap">🔵 Optima — Open Space 2</div>
+        </div>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-card optima">
+          <div class="ccard-head">
+            <div class="vbadge opt mb16">🔵 Wariant Optima</div>
+            <h3>Open Space — mniejszy zakres</h3>
+            <p>43 krzesła Xilium DUO-BACK · CS5040 Desk · ES Cabinet</p>
+          </div>
+          <div class="ccard-body">
+            <div class="crow"><span class="cl">Biurka</span><span class="cv">CS5040 Desk I-Leg RC 1400 / 1800 mm</span></div>
+            <div class="crow"><span class="cl">Krzesła pracy</span><span class="cv">Xilium DUO-BACK UPH/P GS ×43</span></div>
+            <div class="crow"><span class="cl">Przechowywanie</span><span class="cv">Easy Space Cabinet D2 5OH + Wardrobe D1</span></div>
+            <div class="crow"><span class="cl">Kabiny akustyczne</span><span class="cv">SPIX Phone Pod (1-os.) ×3</span></div>
+            <div class="crow"><span class="cl">Kolor blatu</span><span class="cv">NK Neutral Kraft / MS Slate</span></div>
+            <div class="crow"><span class="cl">Media port</span><span class="cv">Grommet plastikowy owalny</span></div>
+          </div>
+        </div>
+        <div class="compare-card maks">
+          <div class="ccard-head">
+            <div class="vbadge mak mb16">🟡 Wariant Maks</div>
+            <h3>Open Space — pełen zakres</h3>
+            <p>48 krzeseł Xilium DUO-BACK · CS5040 · Puzlo Locker</p>
+          </div>
+          <div class="ccard-body">
+            <div class="crow"><span class="cl">Biurka</span><span class="cv">CS5040 Desk I-Leg PN 1600 mm</span></div>
+            <div class="crow"><span class="cl">Krzesła pracy</span><span class="cv">Xilium DUO-BACK UPH/P GS ×48</span></div>
+            <div class="crow"><span class="cl">Przechowywanie</span><span class="cv">Puzlo Locker Cabinet SQ ×14</span></div>
+            <div class="crow"><span class="cl">Kabiny akustyczne</span><span class="cv">SPIX Meet Pod (4-os.) ×2</span></div>
+            <div class="crow"><span class="cl">Kolor blatu</span><span class="cv">NJ Acacia Light / CW Black Graphite</span></div>
+            <div class="crow"><span class="cl">Media port</span><span class="cv">EVOline Circle80 (P) + grommet (L)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box box-blue" style="margin-top:4px;">
+        <h4>📌 Wspólny mianownik obu wariantów</h4>
+        <p>Oba warianty korzystają z tego samego systemu krzeseł <strong>Xilium DUO-BACK</strong> oraz biurek <strong>CS5040</strong> — gwarantuje to jednolity poziom ergonomii dla każdego pracownika. Kluczowa różnica to <strong>liczba stanowisk</strong> (43 vs 48) oraz rozwiązanie do przechowywania (lockery vs szafy). Paleta MFC jest harmonijna w obu wersjach — różni się odcieniem, nie charakterem.</p>
+      </div>
+    </div>
+
+    <!-- ══ SLIDE 6: SALE & SOCJALNE ═════════════════════════ -->
+    <div class="slide" id="s6">
+      <div class="sec-header">
+        <div class="sec-tag">Strefy 3–4</div>
+        <div class="sec-title">Sale konferencyjne · Pomieszczenia socjalne</div>
+      </div>
+
+      <div class="gallery-grid g4 mb24" style="height:280px;">
+        <div class="gitem wide" style="min-height:280px;">
+          <img src="materialy/08_parter_du++a sala konf.png" alt="Sala konf" style="object-fit:contain;background:#f0f2f5;">
+          <div class="gcap">Duża sala konferencyjna</div>
+        </div>
+        <div class="gitem" style="min-height:130px;">
+          <img src="materialy/09_parter_mała salka.png" alt="Mała salka" style="object-fit:contain;background:#f0f2f5;">
+          <div class="gcap">Mała salka</div>
+        </div>
+        <div class="gitem" style="min-height:130px;">
+          <img src="materialy/10_pom socjalne_izo.png" alt="Socjalne" style="object-fit:contain;background:#f0f2f5;">
+          <div class="gcap">Socjalne / Izolacja</div>
+        </div>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-card optima">
+          <div class="ccard-head">
+            <div class="vbadge opt mb16">🔵 Optima</div>
+            <h3>Sale konferencyjne</h3>
+          </div>
+          <div class="ccard-body">
+            <div class="crow"><span class="cl">Duża sala</span><span class="cv">CS5040 A-Leg T1 Plus 2000×1200 ×1 + Flesco ×12</span></div>
+            <div class="crow"><span class="cl">Mała salka</span><span class="cv">CS5040 H A-Leg 1800×900 ×1 + Vapaa 4L ×14</span></div>
+            <div class="crow"><span class="cl">Kolory stołów</span><span class="cv">MG Misty / CW Black Graphite</span></div>
+            <div class="crow"><span class="cl">Media w sali</span><span class="cv">EVOline 3× 230V + USB A+C</span></div>
+          </div>
+        </div>
+        <div class="compare-card maks">
+          <div class="ccard-head">
+            <div class="vbadge mak mb16">🟡 Maks</div>
+            <h3>Sale konferencyjne</h3>
+          </div>
+          <div class="ccard-body">
+            <div class="crow"><span class="cl">Duże sale</span><span class="cv">CS5040 A-Leg T1 Plus 2000×1200 ×2 + Flesco ×12</span></div>
+            <div class="crow"><span class="cl">Mała salka</span><span class="cv">CS5040 I-Leg 1800×900 ×1 + Vapaa 4L ×14</span></div>
+            <div class="crow"><span class="cl">Kolory stołów</span><span class="cv">CW Black Graphite + MG Misty</span></div>
+            <div class="crow"><span class="cl">Media w sali</span><span class="cv">EVOline 3× 230V + USB A+C</span></div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="light">
+
+      <div class="two-col" style="margin-top:4px;">
+        <div class="info-box box-blue">
+          <h4>☕ Pomieszczenie socjalne — oba warianty</h4>
+          <p>
+            <strong>Naudu Sofa 4L</strong> — sofa 2-os., tkanina Cura, czarna noga<br>
+            <strong>Aplo Cabinet Set S3</strong> — zestaw szafek 1180×400 mm (Maks)<br>
+            <strong>Naudu Armchair 4L</strong> — 2 fotele (Optima)<br>
+            <strong>Flowerpot Case</strong> — osłona Multo, MFC Acacia Light<br>
+            <strong>Tilkka Table Mini</strong> — stolik ⌀380, H545 mm (Optima)
+          </p>
+        </div>
+        <div class="info-box box-amber">
+          <h4>🗄️ Szatnia i przechowywanie</h4>
+          <p>
+            <strong>Easy Space Wardrobe D1</strong> — szafa ubraniowa 6OH, prawo- i lewostronna, ×8 szt.<br>
+            <strong>Easy Space Cabinet D2</strong> — szafa 6OH ×3 + 2OH ×1<br>
+            <strong>Easy Space Open Cabinet</strong> — regał otwarty 6OH ×1–2<br>
+            W obu wariantach identyczny zakres szatni.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SLIDE 7: PIĘTRO ═══════════════════════════════════ -->
+    <div class="slide" id="s7">
+      <div class="sec-header">
+        <div class="sec-tag">Piętro</div>
+        <div class="sec-title">Open Space — Piętro</div>
+        <div class="sec-desc">Piętro zachowuje spójność z parterem. Oba warianty — Optima i Maks — różnią się typem biurka i kolorystyką (analogicznie jak na parterze).</div>
+      </div>
+
+      <div class="two-col mb24">
+        <div>
+          <div class="vbadge opt">🔵 Wariant Optima — Piętro</div>
+          <div class="fp-box"><img src="materialy/12_piętro_wariant optima_rzut.png" alt="Piętro Optima">
+            <div class="fp-lbl">Piętro · Wariant Optima</div></div>
+        </div>
+        <div>
+          <div class="vbadge mak">🟡 Wariant Maks — Piętro</div>
+          <div class="fp-box"><img src="materialy/11_piętro_wariant maks_rzut.png" alt="Piętro Maks">
+            <div class="fp-lbl">Piętro · Wariant Maks</div></div>
+        </div>
+      </div>
+
+      <div class="gallery-grid g4" style="height:200px;">
+        <div class="gitem">
+          <img src="materialy/13_piętro_openspace 1.png" alt="">
+          <div class="gcap">🟡 Maks — Widok 1</div>
+        </div>
+        <div class="gitem">
+          <img src="materialy/14_piętro_openspace 2.png" alt="">
+          <div class="gcap">🟡 Maks — Widok 2</div>
+        </div>
+        <div class="gitem">
+          <img src="materialy/15_piętro_openspace 11.png" alt="">
+          <div class="gcap">🔵 Optima — Widok 1</div>
+        </div>
+        <div class="gitem">
+          <img src="materialy/16_piętro_openspace 22.png" alt="">
+          <div class="gcap">🔵 Optima — Widok 2</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SLIDE 8: PRODUKTY ════════════════════════════════ -->
+    <div class="slide" id="s8">
+      <div class="sec-header">
+        <div class="sec-tag">Produkty</div>
+        <div class="sec-title">Kluczowe linie produktowe</div>
+        <div class="sec-desc">Zastosowane produkty należą do tych samych linii w obu wariantach. Wariant Maks korzysta z bogatszych konfiguracji i większej liczby sztuk.</div>
+      </div>
+
+      <div class="products-grid">
+
+        <!-- XILIUM -->
+        <div class="prod-card">
+          <div class="prod-img">
+            <img src="https://www.nowystyl.com/getmedia/d09dff51-18d9-43f9-a466-05a7f0f51e75/xilium-aboutline-arrangement-3611.jpg" alt="Xilium"
+                 onerror="this.parentNode.innerHTML='<div class=img-placeholder>🪑</div>'">
+          </div>
+          <div class="prod-body">
+            <div class="prod-line">Krzesła obrotowe</div>
+            <div class="prod-name">Xilium DUO-BACK</div>
+            <div class="prod-desc">Krzesło ergonomiczne z innowacyjnym dwuczęściowym oparciem DUO-BACK — redukuje nacisk na kręgosłup o do 50%. Certyfikat GS typ B, mechanizm ERN-ST synchroniczny, pianka wtryskiwana. German Design Award &amp; German Innovation Award Gold 2019. Design: Martin Ballendat.</div>
+            <div class="prod-footer">
+              <div class="prod-tags">
+                <span class="prod-tag">🔵 Optima ×43</span>
+                <span class="prod-tag">🟡 Maks ×48</span>
+                <span class="prod-tag">GS Cert.</span>
+              </div>
+              <a class="prod-link" href="https://www.nowystyl.com/pl/xilium/" target="_blank">nowystyl.com</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CS5040 DESK -->
+        <div class="prod-card">
+          <div class="prod-img">
+            <img src="https://www.nowystyl.com/getmedia/752f8820-39a3-4f4c-aea7-be1972d78ab3/cs5040-01-5013.jpg" alt="CS5040"
+                 onerror="this.parentNode.innerHTML='<div class=img-placeholder>🖥️</div>'">
+          </div>
+          <div class="prod-body">
+            <div class="prod-line">Biurka & stanowiska pracy</div>
+            <div class="prod-name">CS5040 — biurka pracownicze</div>
+            <div class="prod-desc"><strong>CS5040 I-Leg PN (Maks):</strong> biurko 1600×800 mm z media portem EVOline Circle80, nóżka I-type, blat 25 mm MFC, panele górne. German Design Award 2020.<br><strong>CS5040 I-Leg RC (Optima):</strong> biurka 1400–1800 mm tej samej rodziny — układ dostosowany do większej przestrzeni per pracownik, bez zintegrowanego media portu (grommet owalny).</div>
+            <div class="prod-footer">
+              <div class="prod-tags">
+                <span class="prod-tag">🔵 Optima (CS5040)</span>
+                <span class="prod-tag">🟡 CS5040 (Maks)</span>
+              </div>
+              <a class="prod-link" href="https://www.nowystyl.com/pl/cs5040/" target="_blank">nowystyl.com</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- SPIX -->
+        <div class="prod-card">
+          <div class="prod-img">
+            <img src="https://www.nowystyl.com/getmedia/2e91dd45-13a4-411b-a58f-233388e5714f/spix-acoustic-pods-nowy-styl-arrangement-01-49351.jpg" alt="SPIX"
+                 onerror="this.parentNode.innerHTML='<div class=img-placeholder>🏢</div>'">
+          </div>
+          <div class="prod-body">
+            <div class="prod-line">Kabiny akustyczne</div>
+            <div class="prod-name">SPIX — Phone Pod / Meet Pod</div>
+            <div class="prod-desc">Kabiny SPIX — prywatność i komfort akustyczny w open space. <strong>Phone Pod</strong> (1 os., 1000×1000 mm) — Optima ×3. <strong>Meet Pod 4U</strong> (4 os., 2200×1250 mm) — Maks ×2. Obie wersje: LED, wentylacja, media port Netbox Flush, sygnalizator zajętości, materiały FSC.</div>
+            <div class="prod-footer">
+              <div class="prod-tags">
+                <span class="prod-tag">🔵 Phone Pod ×3</span>
+                <span class="prod-tag">🟡 Meet Pod ×2</span>
+                <span class="prod-tag">FSC</span>
+              </div>
+              <a class="prod-link" href="https://www.nowystyl.com/pl/spix/" target="_blank">nowystyl.com</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- VELUM -->
+        <div class="prod-card">
+          <div class="prod-img">
+            <img src="materialy/03_recepcja 2.png" alt="Velum recepcja"
+                 onerror="this.parentNode.innerHTML='<div class=img-placeholder>📋</div>'">
+          </div>
+          <div class="prod-body">
+            <div class="prod-line">Recepcja</div>
+            <div class="prod-name">Velum — Lada recepcyjna</div>
+            <div class="prod-desc">Modularna lada recepcyjna — moduł prostokątny wysoki (H 1120 mm), blat MFC 25 mm, szer. 2000 mm. Możliwość konfiguracji kątowej i rozbudowy o moduły dodatkowe. Reprezentacyjna strefa wejścia. Identyczna w obu wariantach projektu.</div>
+            <div class="prod-footer">
+              <div class="prod-tags">
+                <span class="prod-tag">🔵 Optima ×1</span>
+                <span class="prod-tag">🟡 Maks ×1</span>
+              </div>
+              <a class="prod-link" href="https://www.nowystyl.com/pl/szukaj/?search=velum" target="_blank">nowystyl.com</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- PUZLO / ES CABINET -->
+        <div class="prod-card">
+          <div class="prod-img">
+            <img src="https://www.nowystyl.com/getmedia/97d8601a-1e5a-4c68-b969-8b5f44fd0d80/easyspace-cabinets-71-3628.jpg" alt="Puzlo Locker / Easy Space"
+                 onerror="this.parentNode.innerHTML='<div class=img-placeholder>🗄️</div>'">
+          </div>
+          <div class="prod-body">
+            <div class="prod-line">Lockery & meble do przechowywania</div>
+            <div class="prod-name">Puzlo Locker / Easy Space Cabinet</div>
+            <div class="prod-desc"><strong>Puzlo Cabinet SQ (Maks):</strong> locker pracowniczy na metalowej podstawie, soft-close, zamek cylindryczny, MFC — ×14 szt. przy biurkach.<br><strong>Easy Space Cabinet D2 (Optima):</strong> szafy pracownicze 5OH MFC — modułowe, wielokonfigurowalny system szaf, wardrobe i regałów.</div>
+            <div class="prod-footer">
+              <div class="prod-tags">
+                <span class="prod-tag">🔵 ES Cabinet</span>
+                <span class="prod-tag">🟡 Puzlo ×14</span>
+              </div>
+              <a class="prod-link" href="https://www.nowystyl.com/pl/puzlo/" target="_blank">nowystyl.com</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CS5040 MEETING TABLE -->
+        <div class="prod-card">
+          <div class="prod-img">
+            <img src="https://www.nowystyl.com/getmedia/8a1a8028-c80c-4910-b79e-d101f3f8758e/cs5040-20-12866.jpg" alt="Stół konferencyjny CS5040"
+                 onerror="this.parentNode.innerHTML='<div class=img-placeholder>📊</div>'">
+          </div>
+          <div class="prod-body">
+            <div class="prod-line">Stoły konferencyjne</div>
+            <div class="prod-name">CS5040 Meeting Table A-Leg</div>
+            <div class="prod-desc">Stół konferencyjny 2000×1200 mm, noga A-type, media port EVOline ×3 (230V + USB A+C), poziome prowadnice kablowe. Blat 25 mm MFC. Identyczny w obu wariantach — różni się tylko liczbą sal: Optima ×1 duża sala, Maks ×2 duże sale.</div>
+            <div class="prod-footer">
+              <div class="prod-tags">
+                <span class="prod-tag">🔵 Optima ×1 sala</span>
+                <span class="prod-tag">🟡 Maks ×2 sale</span>
+                <span class="prod-tag">EVOline</span>
+              </div>
+              <a class="prod-link" href="https://www.nowystyl.com/pl/cs5040/" target="_blank">nowystyl.com</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- FLESCO -->
+        <div class="prod-card">
+          <div class="prod-img">
+            <img src="materialy/08_parter_du++a sala konf.png" alt="Flesco"
+                 onerror="this.parentNode.innerHTML='<div class=img-placeholder>🪑</div>'">
+          </div>
+          <div class="prod-body">
+            <div class="prod-line">Krzesła konferencyjne</div>
+            <div class="prod-name">Flesco 4LA UPH</div>
+            <div class="prod-desc">Krzesło konferencyjne tapicerowane z podłokietnikami do dużej sali — ×12 szt. Linia Flesco (od włoskiego „flessibile" — elastyczny) łączy nowoczesny design z komfortem dla uczestników dłuższych spotkań. Identyczne w obu wariantach.</div>
+            <div class="prod-footer">
+              <div class="prod-tags">
+                <span class="prod-tag">🔵 Optima ×12</span>
+                <span class="prod-tag">🟡 Maks ×12</span>
+              </div>
+              <a class="prod-link" href="https://www.nowystyl.com/pl/flesco/" target="_blank">nowystyl.com</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- VAPAA -->
+        <div class="prod-card">
+          <div class="prod-img">
+            <img src="materialy/09_parter_mała salka.png" alt="Vapaa"
+                 onerror="this.parentNode.innerHTML='<div class=img-placeholder>🪑</div>'">
+          </div>
+          <div class="prod-body">
+            <div class="prod-line">Krzesła konferencyjne</div>
+            <div class="prod-name">Vapaa 4L W</div>
+            <div class="prod-desc">Krzesło z drewnianą skorupą bukową (bejcowaną) do małej salki konferencyjnej — ×14 szt. Lekka, stackowalna forma. Możliwość łączenia w rzędy. Certyfikat FSC/EUTR. Identyczne w obu wariantach.</div>
+            <div class="prod-footer">
+              <div class="prod-tags">
+                <span class="prod-tag">🔵 Optima ×14</span>
+                <span class="prod-tag">🟡 Maks ×14</span>
+                <span class="prod-tag">FSC</span>
+              </div>
+              <a class="prod-link" href="https://www.nowystyl.com/pl/vapaa/" target="_blank">nowystyl.com</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- NAUDU + TILKKA -->
+        <div class="prod-card">
+          <div class="prod-img">
+            <img src="materialy/10_pom socjalne_izo.png" alt="Naudu Tilkka soft seating"
+                 onerror="this.parentNode.innerHTML='<div class=img-placeholder>🛋️</div>'">
+          </div>
+          <div class="prod-body">
+            <div class="prod-line">Soft seating</div>
+            <div class="prod-name">Naudu Sofa + Tilkka Sofa</div>
+            <div class="prod-desc"><strong>Naudu Sofa 4L</strong> — sofa 2-os. 1170×590 mm w strefie socjalnej, tkanina Cura, metalowa nóżka czarna.<br><strong>Tilkka Sofa 4L</strong> — sofa 2-os. 1180×720 mm w recepcji, tkanina Cura. Obydwie identyczne w obu wariantach projektu.</div>
+            <div class="prod-footer">
+              <div class="prod-tags">
+                <span class="prod-tag">🔵 Optima</span>
+                <span class="prod-tag">🟡 Maks</span>
+                <span class="prod-tag">Cura fabric</span>
+              </div>
+              <a class="prod-link" href="https://www.nowystyl.com/pl/naudu/" target="_blank">nowystyl.com</a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /products-grid -->
+    </div>
+
+    <!-- ══ SLIDE 9: PODSUMOWANIE ════════════════════════════ -->
+    <div class="slide" id="s9">
+      <div class="sec-header">
+        <div class="sec-tag">Podsumowanie</div>
+        <div class="sec-title">Zestawienie wariantów projektu</div>
+        <div class="sec-desc">Oba warianty opierają się na tej samej rodzinie produktów i tych samych systemach. Główna różnica to zakres — liczba stanowisk pracy i pojemność sal konferencyjnych.</div>
+      </div>
+
+      <table class="sum-table">
+        <thead>
+          <tr>
+            <th style="width:22%">Strefa / Element</th>
+            <th>🔵 Wariant OPTIMA — mniejszy zakres</th>
+            <th>🟡 Wariant MAKS — pełen zakres</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Recepcja</td>
+            <td>Velum ×1, Xilium ×1, Tilkka Sofa + Table</td>
+            <td>Velum ×1, Xilium ×2, Tilkka Sofa + Table</td>
+          </tr>
+          <tr>
+            <td>Biurka open space</td>
+            <td>CS5040 Desk I-Leg RC 1400/1800 mm</td>
+            <td>CS5040 I-Leg PN 1600 mm + EVOline Circle80</td>
+          </tr>
+          <tr>
+            <td>Krzesła pracy</td>
+            <td>Xilium DUO-BACK UPH/P GS ×43</td>
+            <td>Xilium DUO-BACK UPH/P GS ×48</td>
+          </tr>
+          <tr>
+            <td>Przechowywanie (open space)</td>
+            <td>Easy Space Cabinet D2 5OH + Wardrobe D1</td>
+            <td>Puzlo Locker SQ Cabinet ×14</td>
+          </tr>
+          <tr>
+            <td>Kabiny akustyczne</td>
+            <td>SPIX Phone Pod (1-os.) ×3</td>
+            <td>SPIX Meet Pod 4U (4-os.) ×2</td>
+          </tr>
+          <tr>
+            <td>Duże sale konf.</td>
+            <td>CS5040 A-Leg 2000×1200 ×1 + Flesco ×12</td>
+            <td>CS5040 A-Leg 2000×1200 ×2 + Flesco ×12</td>
+          </tr>
+          <tr>
+            <td>Mała salka</td>
+            <td>CS5040 H A-Leg 1800×900 + Vapaa 4L W ×14</td>
+            <td>CS5040 I-Leg 1800×900 + Vapaa 4L W ×14</td>
+          </tr>
+          <tr>
+            <td>Strefa socjalna</td>
+            <td>Naudu Sofa ×1, Naudu Armchair ×2, Tilkka Mini, Aplo Cabinet, Flowerpot 2</td>
+            <td>Naudu Sofa ×1, Aplo Cabinet S3, Flowerpot 1, ES Open Cabinet</td>
+          </tr>
+          <tr>
+            <td>Szatnia</td>
+            <td>ES Wardrobe D1 6OH R+L + ES Cabinet D2</td>
+            <td>ES Wardrobe D1 6OH R+L + ES Cabinet D2 ×3</td>
+          </tr>
+          <tr>
+            <td>Paleta MFC</td>
+            <td>NK Neutral Kraft, MS Slate, CW Black Graphite</td>
+            <td>NJ Acacia Light, CW Black Graphite, MB Molinie Brun</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="two-col">
+        <div class="info-box box-blue">
+          <h4>🔵 Wariant Optima — dla kogo?</h4>
+          <p>Dla firm, które cenią większą przestrzeń indywidualną pracownika i mniejsze zagęszczenie stanowisk pracy. Identyczna ergonomia krzeseł Xilium, ta sama estetyka kolorystyczna, czytelny podział stref. Mniejsza liczba stanowisk, ale pełna funkcjonalność każdej strefy biura.</p>
+        </div>
+        <div class="info-box box-amber">
+          <h4>🟡 Wariant Maks — dla kogo?</h4>
+          <p>Dla firm stawiających na maksymalne wykorzystanie dostępnego metrażu i najbardziej zaawansowane systemy. CS5040 z wbudowanymi media portami, system Puzlo Locker przy biurkach, duża kabina SPIX Meet Pod dla 4 osób. Najwyższe zagęszczenie funkcjonalności na dostępnej powierzchni.</p>
+        </div>
+      </div>
+
+      <div style="background:#f8f9fa;border-radius:10px;padding:16px 22px;margin-top:18px;border:1px solid var(--ns-border);text-align:center;">
+        <p style="font-size:12px;color:#aaa;">Prezentacja przygotowana przez Nowy Styl &nbsp;·&nbsp; <a href="https://www.nowystyl.com/pl/" target="_blank" style="color:var(--ns-blue);text-decoration:none;font-weight:700;">nowystyl.com</a> &nbsp;·&nbsp; Ceny nie są prezentowane — oferta cenowa zostanie przesłana oddzielnie.</p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// ════ STATE ════════════════════════════════════════════
+let cur = 0;
+const TOTAL = 10;
+
+// ════ GOTO ════════════════════════════════════════════
+function goTo(idx) {
+  // hide current
+  const prev = document.getElementById('s' + cur);
+  if (prev) prev.classList.remove('active');
+
+  cur = Math.max(0, Math.min(idx, TOTAL - 1));
+
+  // show new
+  const next = document.getElementById('s' + cur);
+  if (next) next.classList.add('active');
+
+  // update sidebar
+  const items = document.querySelectorAll('.sidebar-item');
+  items.forEach((el, i) => el.classList.toggle('active', i === cur));
+
+  // update counter
+  document.getElementById('counter').textContent = (cur + 1) + ' / ' + TOTAL;
+
+  // scroll to top smoothly
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ════ KEYBOARD ════════════════════════════════════════
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); if (cur < TOTAL-1) goTo(cur+1); }
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { e.preventDefault(); if (cur > 0)       goTo(cur-1); }
+});
+
+// ════ VARIANT FILTER (visual only) ════════════════════
+function switchVariant(v, el) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  // Could highlight variant-specific sections in future
+}
+
+// ════ INIT ════════════════════════════════════════════
+goTo(0);
+</script>
+</body>
+</html>
